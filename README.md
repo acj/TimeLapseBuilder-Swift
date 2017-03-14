@@ -26,7 +26,9 @@ Older versions of TimeLapseBuilder are available for Swift 1.2 and 2.0. Check ou
 ## Contributing
 
 If you **found a bug**, open an issue.
+
 If you **have a feature request**, open an issue.
+
 If you **want to contribute** (yay!), submit a pull request.
 
 ## License
