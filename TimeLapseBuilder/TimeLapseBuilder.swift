@@ -25,7 +25,7 @@ class TimeLapseBuilder: NSObject {
         self.photoURLs = photoURLs
     }
     
-    func build(_ progress: @escaping ((Progress) -> Void), success: @escaping ((URL) -> Void), failure: ((NSError) -> Void)) {
+    func build(_ progress: @escaping ((Progress) -> Void), success: @escaping ((URL) -> Void), failure: @escaping ((NSError) -> Void)) {
         let inputSize = CGSize(width: 4000, height: 3000)
         let outputSize = CGSize(width: 1280, height: 720)
         var error: NSError?
@@ -109,7 +109,9 @@ class TimeLapseBuilder: NSObject {
                     
                     videoWriterInput.markAsFinished()
                     videoWriter.finishWriting {
-                        if error == nil {
+                        if let error = error {
+                            failure(error)
+                        } else {
                             success(videoOutputURL)
                         }
                         
