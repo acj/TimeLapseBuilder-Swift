@@ -90,7 +90,6 @@ class TimeLapseBuilder: NSObject {
                         let lastFrameTime = CMTimeMake(frameCount, fps)
                         let presentationTime = frameCount == 0 ? lastFrameTime : CMTimeAdd(lastFrameTime, frameDuration)
                         
-                        
                         if !self.appendPixelBufferForImageAtURL(nextPhotoURL, pixelBufferAdaptor: pixelBufferAdaptor, presentationTime: presentationTime) {
                             error = NSError(
                                 domain: kErrorDomain,
