@@ -154,12 +154,12 @@ class TimeLapseBuilder: NSObject {
                         withPresentationTime: presentationTime
                     )
                     
-                    pixelBufferPointer.deinitialize()
+                    pixelBufferPointer.deinitialize(count: 1)
                 } else {
                     NSLog("error: Failed to allocate pixel buffer from pool")
                 }
                 
-                pixelBufferPointer.deallocate(capacity: 1)
+                pixelBufferPointer.deallocate()
             }
         }
         
