@@ -3,13 +3,6 @@
 //
 //  Created by Adam Jensen on 11/18/16.
 
-//
-//  TimeLapseBuilder30.swift
-//
-//  Created by Adam Jensen on 11/18/16.
-//
-//  NOTE: This implementation is written in Swift 3.0.
-
 import AVFoundation
 import UIKit
 
