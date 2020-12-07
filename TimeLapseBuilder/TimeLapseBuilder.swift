@@ -1,5 +1,5 @@
 //
-//  TimeLapseBuilder30.swift
+//  TimeLapseBuilder.swift
 //
 //  Created by Adam Jensen on 11/18/16.
 
@@ -46,7 +46,7 @@ class TimeLapseBuilder: NSObject {
         
         if let videoWriter = videoWriter {
             let videoSettings: [String : AnyObject] = [
-                AVVideoCodecKey  : AVVideoCodecH264 as AnyObject,
+                AVVideoCodecKey  : AVVideoCodecType.h264 as AnyObject,
                 AVVideoWidthKey  : outputSize.width as AnyObject,
                 AVVideoHeightKey : outputSize.height as AnyObject,
                 //        AVVideoCompressionPropertiesKey : [
@@ -72,14 +72,14 @@ class TimeLapseBuilder: NSObject {
             videoWriter.add(videoWriterInput)
             
             if videoWriter.startWriting() {
-                videoWriter.startSession(atSourceTime: kCMTimeZero)
+                videoWriter.startSession(atSourceTime: CMTime.zero)
                 assert(pixelBufferAdaptor.pixelBufferPool != nil)
                 
                 let media_queue = DispatchQueue(label: "mediaInputQueue")
                 
                 videoWriterInput.requestMediaDataWhenReady(on: media_queue) {
                     let fps: Int32 = 30
-                    let frameDuration = CMTimeMake(1, fps)
+                    let frameDuration = CMTimeMake(value: 1, timescale: fps)
                     let currentProgress = Progress(totalUnitCount: Int64(self.photoURLs.count))
                     
                     var frameCount: Int64 = 0
@@ -87,7 +87,7 @@ class TimeLapseBuilder: NSObject {
                     
                     while videoWriterInput.isReadyForMoreMediaData && !remainingPhotoURLs.isEmpty {
                         let nextPhotoURL = remainingPhotoURLs.remove(at: 0)
-                        let lastFrameTime = CMTimeMake(frameCount, fps)
+                        let lastFrameTime = CMTimeMake(value: frameCount, timescale: fps)
                         let presentationTime = frameCount == 0 ? lastFrameTime : CMTimeAdd(lastFrameTime, frameDuration)
                         
                         if !self.appendPixelBufferForImageAtURL(nextPhotoURL, pixelBufferAdaptor: pixelBufferAdaptor, presentationTime: presentationTime) {
