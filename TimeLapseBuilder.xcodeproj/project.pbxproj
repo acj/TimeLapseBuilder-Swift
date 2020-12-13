@@ -9,11 +9,14 @@
 /* Begin PBXBuildFile section */
 		640B4BA71DDF3C4F003F10E4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640B4BA61DDF3C4F003F10E4 /* ViewController.swift */; };
 		640B4BAA1DDF3C4F003F10E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 640B4BA81DDF3C4F003F10E4 /* Main.storyboard */; };
-		640B4BAC1DDF3C4F003F10E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 640B4BAB1DDF3C4F003F10E4 /* Assets.xcassets */; };
 		640B4BAF1DDF3C4F003F10E4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 640B4BAD1DDF3C4F003F10E4 /* LaunchScreen.storyboard */; };
 		640B4BBA1DDF3C4F003F10E4 /* TimeLapseBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640B4BB91DDF3C4F003F10E4 /* TimeLapseBuilderTests.swift */; };
 		640B4BC51DDF3C69003F10E4 /* TimeLapseBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640B4BC41DDF3C69003F10E4 /* TimeLapseBuilder.swift */; };
 		640BD6961E75CB310089B27A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640BD6951E75CB310089B27A /* AppDelegate.swift */; };
+		64C76B582585AD4C007D758A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 640B4BAB1DDF3C4F003F10E4 /* Assets.xcassets */; };
+		64C76B672585B3B2007D758A /* red.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64C76B642585B3B2007D758A /* red.jpg */; };
+		64C76B682585B3B2007D758A /* white.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64C76B652585B3B2007D758A /* white.jpg */; };
+		64C76B692585B3B2007D758A /* blue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64C76B662585B3B2007D758A /* blue.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +41,9 @@
 		640B4BBB1DDF3C4F003F10E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		640B4BC41DDF3C69003F10E4 /* TimeLapseBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLapseBuilder.swift; sourceTree = "<group>"; };
 		640BD6951E75CB310089B27A /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		64C76B642585B3B2007D758A /* red.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = red.jpg; sourceTree = "<group>"; };
+		64C76B652585B3B2007D758A /* white.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = white.jpg; sourceTree = "<group>"; };
+		64C76B662585B3B2007D758A /* blue.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blue.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +99,9 @@
 		640B4BB81DDF3C4F003F10E4 /* TimeLapseBuilderTests */ = {
 			isa = PBXGroup;
 			children = (
+				64C76B662585B3B2007D758A /* blue.jpg */,
+				64C76B642585B3B2007D758A /* red.jpg */,
+				64C76B652585B3B2007D758A /* white.jpg */,
 				640B4BB91DDF3C4F003F10E4 /* TimeLapseBuilderTests.swift */,
 				640B4BBB1DDF3C4F003F10E4 /* Info.plist */,
 			);
@@ -185,7 +194,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				640B4BAF1DDF3C4F003F10E4 /* LaunchScreen.storyboard in Resources */,
-				640B4BAC1DDF3C4F003F10E4 /* Assets.xcassets in Resources */,
+				64C76B582585AD4C007D758A /* Assets.xcassets in Resources */,
 				640B4BAA1DDF3C4F003F10E4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -194,6 +203,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64C76B672585B3B2007D758A /* red.jpg in Resources */,
+				64C76B682585B3B2007D758A /* white.jpg in Resources */,
+				64C76B692585B3B2007D758A /* blue.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
