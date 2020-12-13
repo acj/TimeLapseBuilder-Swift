@@ -10,7 +10,7 @@ let kErrorDomain = "TimeLapseBuilder"
 let kFailedToStartAssetWriterError = 0
 let kFailedToAppendPixelBufferError = 1
 
-class TimeLapseBuilder: NSObject {
+class TimeLapseBuilder {
     let photoURLs: [String]
     var videoWriter: AVAssetWriter?
     
