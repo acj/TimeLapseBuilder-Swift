@@ -10,6 +10,7 @@ let kErrorDomain = "TimeLapseBuilder"
 let kFailedToStartAssetWriterError = 0
 let kFailedToAppendPixelBufferError = 1
 let kFailedToDetermineAssetDimensions = 2
+let kFailedToProcessAssetPath = 3
 
 public protocol TimelapseBuilderDelegate: class {
     func timeLapseBuilder(_ timelapseBuilder: TimeLapseBuilder, didMakeProgress progress: Progress)
@@ -94,17 +95,25 @@ public class TimeLapseBuilder {
                     let currentProgress = Progress(totalUnitCount: Int64(assetPaths.count))
                     
                     var frameCount: Int64 = 0
-                    var remainingPhotoURLs = [String](assetPaths)
+                    var remainingAssetPaths = [String](assetPaths)
                     
-                    while !remainingPhotoURLs.isEmpty {
+                    while !remainingAssetPaths.isEmpty {
                         while videoWriterInput.isReadyForMoreMediaData {
-                            if remainingPhotoURLs.isEmpty {
+                            if remainingAssetPaths.isEmpty {
                                 break
                             }
-                            let nextPhotoURL = remainingPhotoURLs.remove(at: 0)
+                            let nextAssetPath = remainingAssetPaths.remove(at: 0)
+                            guard let nextAssetURL = URL(string: nextAssetPath) else {
+                                error = NSError(
+                                    domain: kErrorDomain,
+                                    code: kFailedToProcessAssetPath,
+                                    userInfo: ["description": "TimelapseBuilder failed to process the asset path. Is it a valid URL or file path?"]
+                                )
+                                break
+                            }
                             let presentationTime = CMTimeMake(value: frameCount, timescale: fps)
                             
-                            if !self.appendPixelBufferForImageAtURL(nextPhotoURL, pixelBufferAdaptor: pixelBufferAdaptor, presentationTime: presentationTime) {
+                            if !self.appendPixelBufferForImageAtURL(nextAssetURL, pixelBufferAdaptor: pixelBufferAdaptor, presentationTime: presentationTime) {
                                 error = NSError(
                                     domain: kErrorDomain,
                                     code: kFailedToAppendPixelBufferError,
@@ -155,14 +164,13 @@ public class TimeLapseBuilder {
         return image.size
     }
     
-    func appendPixelBufferForImageAtURL(_ url: String, pixelBufferAdaptor: AVAssetWriterInputPixelBufferAdaptor, presentationTime: CMTime) -> Bool {
+    func appendPixelBufferForImageAtURL(_ url: URL, pixelBufferAdaptor: AVAssetWriterInputPixelBufferAdaptor, presentationTime: CMTime) -> Bool {
         var appendSucceeded = false
         
         autoreleasepool {
-            if let url = URL(string: url),
-                let imageData = try? Data(contentsOf: url),
-                let image = UIImage(data: imageData),
-                let pixelBufferPool = pixelBufferAdaptor.pixelBufferPool {
+            if let imageData = try? Data(contentsOf: url),
+               let image = UIImage(data: imageData),
+               let pixelBufferPool = pixelBufferAdaptor.pixelBufferPool {
                 let pixelBufferPointer = UnsafeMutablePointer<CVPixelBuffer?>.allocate(capacity: 1)
                 let status: CVReturn = CVPixelBufferPoolCreatePixelBuffer(
                     kCFAllocatorDefault,
