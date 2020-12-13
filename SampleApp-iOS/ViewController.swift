@@ -5,6 +5,7 @@
 //  Created by Adam Jensen on 11/18/16.
 
 import AVKit
+import TimeLapseBuilder
 import UIKit
 
 class ViewController: UIViewController {

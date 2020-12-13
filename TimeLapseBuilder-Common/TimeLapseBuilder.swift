@@ -4,7 +4,13 @@
 //  Created by Adam Jensen on 11/18/16.
 
 import AVFoundation
+
+#if os(macOS)
+import Cocoa
+typealias UIImage = NSImage
+#else
 import UIKit
+#endif
 
 let kErrorDomain = "TimeLapseBuilder"
 let kFailedToStartAssetWriterError = 0
@@ -23,11 +29,11 @@ public class TimeLapseBuilder {
     
     var videoWriter: AVAssetWriter?
     
-    init(delegate: TimelapseBuilderDelegate) {
+    public init(delegate: TimelapseBuilderDelegate) {
         self.delegate = delegate
     }
     
-    func build(with assetPaths: [String], type: AVFileType, toOutputPath: String) {
+    public func build(with assetPaths: [String], type: AVFileType, toOutputPath: String) {
         // Output video dimensions are inferred from the first image asset
         guard
             let firstAssetPath = assetPaths.first,
@@ -220,3 +226,15 @@ public class TimeLapseBuilder {
         CVPixelBufferUnlockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: 0))
     }
 }
+
+#if os(macOS)
+extension NSImage {
+    var cgImage: CGImage? {
+        var proposedRect = CGRect(origin: .zero, size: size)
+
+        return cgImage(forProposedRect: &proposedRect,
+                       context: nil,
+                       hints: nil)
+    }
+}
+#endif
