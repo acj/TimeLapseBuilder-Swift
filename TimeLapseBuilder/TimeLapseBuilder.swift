@@ -77,24 +77,29 @@ class TimeLapseBuilder: NSObject {
                     var frameCount: Int64 = 0
                     var remainingPhotoURLs = [String](self.photoURLs)
                     
-                    while videoWriterInput.isReadyForMoreMediaData && !remainingPhotoURLs.isEmpty {
-                        let nextPhotoURL = remainingPhotoURLs.remove(at: 0)
-                        let presentationTime = CMTimeMake(value: frameCount, timescale: fps)
-                        
-                        if !self.appendPixelBufferForImageAtURL(nextPhotoURL, pixelBufferAdaptor: pixelBufferAdaptor, presentationTime: presentationTime) {
-                            error = NSError(
-                                domain: kErrorDomain,
-                                code: kFailedToAppendPixelBufferError,
-                                userInfo: ["description": "AVAssetWriterInputPixelBufferAdapter failed to append pixel buffer"]
-                            )
+                    while !remainingPhotoURLs.isEmpty {
+                        while videoWriterInput.isReadyForMoreMediaData {
+                            if remainingPhotoURLs.isEmpty {
+                                break
+                            }
+                            let nextPhotoURL = remainingPhotoURLs.remove(at: 0)
+                            let presentationTime = CMTimeMake(value: frameCount, timescale: fps)
                             
-                            break
+                            if !self.appendPixelBufferForImageAtURL(nextPhotoURL, pixelBufferAdaptor: pixelBufferAdaptor, presentationTime: presentationTime) {
+                                error = NSError(
+                                    domain: kErrorDomain,
+                                    code: kFailedToAppendPixelBufferError,
+                                    userInfo: ["description": "AVAssetWriterInputPixelBufferAdapter failed to append pixel buffer"]
+                                )
+                                
+                                break
+                            }
+                            
+                            frameCount += 1
+                            
+                            currentProgress.completedUnitCount = frameCount
+                            progress(currentProgress)
                         }
-                        
-                        frameCount += 1
-                        
-                        currentProgress.completedUnitCount = frameCount
-                        progress(currentProgress)
                     }
                     
                     videoWriterInput.markAsFinished()
