@@ -20,6 +20,7 @@
 		64C76B722586717E007D758A /* blue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64C76B662585B3B2007D758A /* blue.jpg */; };
 		64C76B732586717E007D758A /* red.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64C76B642585B3B2007D758A /* red.jpg */; };
 		64C76B742586717E007D758A /* white.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64C76B652585B3B2007D758A /* white.jpg */; };
+		64C76B782586855F007D758A /* TestDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C76B772586855F007D758A /* TestDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		64C76B642585B3B2007D758A /* red.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = red.jpg; sourceTree = "<group>"; };
 		64C76B652585B3B2007D758A /* white.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = white.jpg; sourceTree = "<group>"; };
 		64C76B662585B3B2007D758A /* blue.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = blue.jpg; sourceTree = "<group>"; };
+		64C76B772586855F007D758A /* TestDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			children = (
 				640B4BB91DDF3C4F003F10E4 /* TimeLapseBuilderTests.swift */,
 				640B4BBB1DDF3C4F003F10E4 /* Info.plist */,
+				64C76B772586855F007D758A /* TestDelegate.swift */,
 			);
 			path = TimeLapseBuilderTests;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64C76B782586855F007D758A /* TestDelegate.swift in Sources */,
 				640B4BBA1DDF3C4F003F10E4 /* TimeLapseBuilderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
