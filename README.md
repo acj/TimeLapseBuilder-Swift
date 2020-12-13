@@ -2,20 +2,15 @@
 
 This is a reference implementation for building time lapse videos from still images using Swift.
 
-The sample app runs on iOS, but the `TimeLapseBuilder` class can be easily ported to run on macOS.
+The core of the library is designed to be portable across iOS and macOS, and there is a sample application for each platform.
 
 ## Getting started
 
  1. Clone this repository
  1. Open `TimeLapseBuilder.xcodeproj` with Xcode
- 1. Have a look at `ViewController.swift` and `TimeLapseBuilder.swift`
- 1. If you provide some URLs in `ViewController.swift` and run the app in the simulator, it will build a video and play it.
+ 1. Select one of the sample applications from the schema list and select `Product > Run`
 
 If you need help adapting this code to use in your app, I recommend posting your questions on [Stack Overflow](https://stackoverflow.com). Please open an issue if you find a bug.
-
-## Legacy Swift
-
-Older versions of TimeLapseBuilder are available for Swift 1.2 and 2.0. Check out the `Legacy/` directory.
 
 ## Notables
 
