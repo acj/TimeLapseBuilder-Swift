@@ -17,6 +17,9 @@
 		64C76B672585B3B2007D758A /* red.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64C76B642585B3B2007D758A /* red.jpg */; };
 		64C76B682585B3B2007D758A /* white.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64C76B652585B3B2007D758A /* white.jpg */; };
 		64C76B692585B3B2007D758A /* blue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64C76B662585B3B2007D758A /* blue.jpg */; };
+		64C76B722586717E007D758A /* blue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64C76B662585B3B2007D758A /* blue.jpg */; };
+		64C76B732586717E007D758A /* red.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64C76B642585B3B2007D758A /* red.jpg */; };
+		64C76B742586717E007D758A /* white.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64C76B652585B3B2007D758A /* white.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +88,9 @@
 		640B4BA31DDF3C4F003F10E4 /* TimeLapseBuilder */ = {
 			isa = PBXGroup;
 			children = (
+				64C76B662585B3B2007D758A /* blue.jpg */,
+				64C76B642585B3B2007D758A /* red.jpg */,
+				64C76B652585B3B2007D758A /* white.jpg */,
 				640BD6951E75CB310089B27A /* AppDelegate.swift */,
 				640B4BA61DDF3C4F003F10E4 /* ViewController.swift */,
 				640B4BA81DDF3C4F003F10E4 /* Main.storyboard */,
@@ -99,9 +105,6 @@
 		640B4BB81DDF3C4F003F10E4 /* TimeLapseBuilderTests */ = {
 			isa = PBXGroup;
 			children = (
-				64C76B662585B3B2007D758A /* blue.jpg */,
-				64C76B642585B3B2007D758A /* red.jpg */,
-				64C76B652585B3B2007D758A /* white.jpg */,
 				640B4BB91DDF3C4F003F10E4 /* TimeLapseBuilderTests.swift */,
 				640B4BBB1DDF3C4F003F10E4 /* Info.plist */,
 			);
@@ -193,6 +196,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64C76B722586717E007D758A /* blue.jpg in Resources */,
+				64C76B732586717E007D758A /* red.jpg in Resources */,
+				64C76B742586717E007D758A /* white.jpg in Resources */,
 				640B4BAF1DDF3C4F003F10E4 /* LaunchScreen.storyboard in Resources */,
 				64C76B582585AD4C007D758A /* Assets.xcassets in Resources */,
 				640B4BAA1DDF3C4F003F10E4 /* Main.storyboard in Resources */,

@@ -9,8 +9,7 @@ The sample app runs on iOS, but the `TimeLapseBuilder` class can be easily porte
  1. Clone this repository
  1. Open `TimeLapseBuilder.xcodeproj` with Xcode
  1. Have a look at `ViewController.swift` and `TimeLapseBuilder.swift`
- 1. If you provide some URLs in `ViewController.swift` and run the app in the simulator, it will build a video and output its location in the console.
-  - A very helpful starter project would be for someone to improve `ViewController` so that it plays the video in an `AVPlayerViewController` once it's ready.
+ 1. If you provide some URLs in `ViewController.swift` and run the app in the simulator, it will build a video and play it.
 
 If you need help adapting this code to use in your app, I recommend posting your questions on [Stack Overflow](https://stackoverflow.com). Please open an issue if you find a bug.
 
