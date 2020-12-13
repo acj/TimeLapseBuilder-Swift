@@ -9,6 +9,7 @@ import UIKit
 let kErrorDomain = "TimeLapseBuilder"
 let kFailedToStartAssetWriterError = 0
 let kFailedToAppendPixelBufferError = 1
+let kFailedToDetermineAssetDimensions = 2
 
 public protocol TimelapseBuilderDelegate: class {
     func timeLapseBuilder(_ timelapseBuilder: TimeLapseBuilder, didMakeProgress progress: Progress)
@@ -26,10 +27,22 @@ public class TimeLapseBuilder {
     }
     
     func build(with assetPaths: [String], type: AVFileType, toOutputPath: String) {
-        let inputSize = CGSize(width: 4000, height: 3000)
-        let outputSize = CGSize(width: 1280, height: 720)
-        var error: NSError?
+        guard
+            let firstAssetPath = assetPaths.first,
+            let firstAssetURL = URL(string: firstAssetPath)
+        else {
+            let error = NSError(
+                domain: kErrorDomain,
+                code: kFailedToDetermineAssetDimensions,
+                userInfo: ["description": "TimelapseBuilder failed to determine the dimensions of the first asset. Does the URL or file path exist?"]
+            )
+            self.delegate.timelapseBuilder(self, didFailWithError: error)
+            return
+        }
         
+        // Output video dimensions are inferred from the first image asset
+        let canvasSize = dimensionsOfImage(url: firstAssetURL)
+        var error: NSError?
         let videoOutputURL = URL(fileURLWithPath: toOutputPath)
         
         do {
@@ -46,8 +59,8 @@ public class TimeLapseBuilder {
         if let videoWriter = videoWriter {
             let videoSettings: [String : AnyObject] = [
                 AVVideoCodecKey  : AVVideoCodecType.h264 as AnyObject,
-                AVVideoWidthKey  : outputSize.width as AnyObject,
-                AVVideoHeightKey : outputSize.height as AnyObject,
+                AVVideoWidthKey  : canvasSize.width as AnyObject,
+                AVVideoHeightKey : canvasSize.height as AnyObject,
                 //        AVVideoCompressionPropertiesKey : [
                 //          AVVideoAverageBitRateKey : NSInteger(1000000),
                 //          AVVideoMaxKeyFrameIntervalKey : NSInteger(16),
@@ -59,8 +72,8 @@ public class TimeLapseBuilder {
             
             let sourceBufferAttributes = [
                 (kCVPixelBufferPixelFormatTypeKey as String): Int(kCVPixelFormatType_32ARGB),
-                (kCVPixelBufferWidthKey as String): Float(inputSize.width),
-                (kCVPixelBufferHeightKey as String): Float(inputSize.height)] as [String : Any]
+                (kCVPixelBufferWidthKey as String): Float(canvasSize.width),
+                (kCVPixelBufferHeightKey as String): Float(canvasSize.height)] as [String : Any]
             
             let pixelBufferAdaptor = AVAssetWriterInputPixelBufferAdaptor(
                 assetWriterInput: videoWriterInput,
@@ -131,6 +144,15 @@ public class TimeLapseBuilder {
         if let error = error {
             self.delegate.timelapseBuilder(self, didFailWithError: error)
         }
+    }
+    
+    func dimensionsOfImage(url: URL) -> CGSize {
+        guard let imageData = try? Data(contentsOf: url),
+              let image = UIImage(data: imageData) else {
+            return CGSize.zero
+        }
+        
+        return image.size
     }
     
     func appendPixelBufferForImageAtURL(_ url: String, pixelBufferAdaptor: AVAssetWriterInputPixelBufferAdaptor, presentationTime: CMTime) -> Bool {
