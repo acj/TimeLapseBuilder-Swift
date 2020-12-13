@@ -47,7 +47,6 @@ class TimeLapseBuilderTests: XCTestCase {
         }, failed: { error in
             XCTFail("unexpected failure: \(error)")
         })
-        
         let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
         let outputPath = documentsPath.appendingPathComponent("AssembledVideo.mov")
         
@@ -78,7 +77,6 @@ class TimeLapseBuilderTests: XCTestCase {
         }, failed: { error in
             XCTFail("unexpected failure: \(error)")
         })
-        
         let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
         let outputPath = documentsPath.appendingPathComponent("AssembledVideo.mov")
         
