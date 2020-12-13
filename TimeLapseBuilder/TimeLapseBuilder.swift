@@ -10,28 +10,34 @@ let kErrorDomain = "TimeLapseBuilder"
 let kFailedToStartAssetWriterError = 0
 let kFailedToAppendPixelBufferError = 1
 
-class TimeLapseBuilder {
-    let photoURLs: [String]
+public protocol TimelapseBuilderDelegate: class {
+    func timeLapseBuilder(_ timelapseBuilder: TimeLapseBuilder, didMakeProgress progress: Progress)
+    func timeLapseBuilder(_ timelapseBuilder: TimeLapseBuilder, didFinishWithURL url: URL)
+    func timelapseBuilder(_ timelapseBuilder: TimeLapseBuilder, didFailWithError error: Error)
+}
+
+public class TimeLapseBuilder {
+    public var delegate: TimelapseBuilderDelegate
+    
     var videoWriter: AVAssetWriter?
     
-    init(photoURLs: [String]) {
-        self.photoURLs = photoURLs
+    init(delegate: TimelapseBuilderDelegate) {
+        self.delegate = delegate
     }
     
-    func build(_ progress: @escaping ((Progress) -> Void), success: @escaping ((URL) -> Void), failure: @escaping ((NSError) -> Void)) {
+    func build(with assetPaths: [String], type: AVFileType, toOutputPath: String) {
         let inputSize = CGSize(width: 4000, height: 3000)
         let outputSize = CGSize(width: 1280, height: 720)
         var error: NSError?
         
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
-        let videoOutputURL = URL(fileURLWithPath: documentsPath.appendingPathComponent("AssembledVideo.mov"))
+        let videoOutputURL = URL(fileURLWithPath: toOutputPath)
         
         do {
             try FileManager.default.removeItem(at: videoOutputURL)
         } catch {}
         
         do {
-            try videoWriter = AVAssetWriter(outputURL: videoOutputURL, fileType: AVFileType.mov)
+            try videoWriter = AVAssetWriter(outputURL: videoOutputURL, fileType: type)
         } catch let writerError as NSError {
             error = writerError
             videoWriter = nil
@@ -72,10 +78,10 @@ class TimeLapseBuilder {
                 
                 videoWriterInput.requestMediaDataWhenReady(on: media_queue) {
                     let fps: Int32 = 30
-                    let currentProgress = Progress(totalUnitCount: Int64(self.photoURLs.count))
+                    let currentProgress = Progress(totalUnitCount: Int64(assetPaths.count))
                     
                     var frameCount: Int64 = 0
-                    var remainingPhotoURLs = [String](self.photoURLs)
+                    var remainingPhotoURLs = [String](assetPaths)
                     
                     while !remainingPhotoURLs.isEmpty {
                         while videoWriterInput.isReadyForMoreMediaData {
@@ -98,16 +104,16 @@ class TimeLapseBuilder {
                             frameCount += 1
                             
                             currentProgress.completedUnitCount = frameCount
-                            progress(currentProgress)
+                            self.delegate.timeLapseBuilder(self, didMakeProgress: currentProgress)
                         }
                     }
                     
                     videoWriterInput.markAsFinished()
                     videoWriter.finishWriting {
                         if let error = error {
-                            failure(error)
+                            self.delegate.timelapseBuilder(self, didFailWithError: error)
                         } else {
-                            success(videoOutputURL)
+                            self.delegate.timeLapseBuilder(self, didFinishWithURL: videoOutputURL)
                         }
                         
                         self.videoWriter = nil
@@ -123,7 +129,7 @@ class TimeLapseBuilder {
         }
         
         if let error = error {
-            failure(error)
+            self.delegate.timelapseBuilder(self, didFailWithError: error)
         }
     }
     

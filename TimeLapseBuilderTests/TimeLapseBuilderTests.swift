@@ -13,53 +13,56 @@ import XCTest
 class TimeLapseBuilderTests: XCTestCase {
     func testWhenGivenASeriesOfImages_producesAnOutputFile() {
         let expectation = self.expectation(description: "Build timelapse")
-        
-        let assets = assetList(count: 3)
-        let timelapseBuilder = TimeLapseBuilder(photoURLs: assets)
-        timelapseBuilder.build({ progress in
+        let testDelegate = TestDelegate(progress: { (progress: Progress) in
             // Ignore
-        }, success: { url in
+        }, finished: { url in
             XCTAssertTrue(FileManager.default.fileExists(atPath: url.relativePath))
             expectation.fulfill()
-        }, failure: { error in
+        }, failed: { error in
             XCTFail("unexpected failure: \(error)")
         })
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
+        let outputPath = documentsPath.appendingPathComponent("AssembledVideo.mov")
+        
+        let timelapseBuilder = TimeLapseBuilder(delegate: testDelegate)
+        let assets = assetList(count: 3)
+        
+        timelapseBuilder.build(with: assets, type: .mov, toOutputPath: outputPath)
         
         waitForExpectations(timeout: 5, handler: nil)
     }
     
     func testWhenGivenASeriesOfImages_reportsProgressCorrectly() {
         let expectation = self.expectation(description: "Build timelapse")
-        
         var mostRecentCompletedUnitCount: Int64 = 0
-        let progress = { (progress: Progress) in
+        let testDelegate = TestDelegate(progress: { (progress: Progress) in
             XCTAssertEqual(progress.completedUnitCount, mostRecentCompletedUnitCount + 1)
             mostRecentCompletedUnitCount += 1
             
             if progress.isFinished {
                 expectation.fulfill()
             }
-        }
-        
-        let assets = assetList(count: 3)
-        let timelapseBuilder = TimeLapseBuilder(photoURLs: assets)
-        timelapseBuilder.build(progress, success: { url in
+        }, finished: { url in
             // Ignore
-        }, failure: { error in
+        }, failed: { error in
             XCTFail("unexpected failure: \(error)")
         })
+        
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
+        let outputPath = documentsPath.appendingPathComponent("AssembledVideo.mov")
+        
+        let assets = assetList(count: 3)
+        let timelapseBuilder = TimeLapseBuilder(delegate: testDelegate)
+        timelapseBuilder.build(with: assets, type: .mov, toOutputPath: outputPath)
         
         waitForExpectations(timeout: 5, handler: nil)
     }
     
     func testWhenGivenASeriesOfImages_producesVideoOfExpectedDuration() {
         let expectation = self.expectation(description: "Build timelapse")
-        
-        let assets = assetList(count: 30)
-        let timelapseBuilder = TimeLapseBuilder(photoURLs: assets)
-        timelapseBuilder.build({ progress in
+        let testDelegate = TestDelegate(progress: { progress in
             // Ignore
-        }, success: { url in
+        }, finished: { url in
             let asset = AVURLAsset(url: url)
             var frameCount = 0
             do {
@@ -72,9 +75,16 @@ class TimeLapseBuilderTests: XCTestCase {
             XCTAssertEqual(frameCount, 34, "Unexpected frame count")
             
             expectation.fulfill()
-        }, failure: { error in
+        }, failed: { error in
             XCTFail("unexpected failure: \(error)")
         })
+        
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
+        let outputPath = documentsPath.appendingPathComponent("AssembledVideo.mov")
+        
+        let assets = assetList(count: 30)
+        let timelapseBuilder = TimeLapseBuilder(delegate: testDelegate)
+        timelapseBuilder.build(with: assets, type: .mov, toOutputPath: outputPath)
         
         waitForExpectations(timeout: 5, handler: nil)
     }
@@ -95,6 +105,30 @@ class TimeLapseBuilderTests: XCTestCase {
         }
         
         return assets
+    }
+}
+
+class TestDelegate: TimelapseBuilderDelegate {
+    var progressFunc: ((Progress) -> Void)?
+    var finishedFunc: ((URL) -> Void)?
+    var failedFunc: ((Error) -> Void)?
+    
+    init(progress: ((Progress) -> Void)?, finished: ((URL) -> Void)?, failed: ((Error) -> Void)?) {
+        self.progressFunc = progress
+        self.finishedFunc = finished
+        self.failedFunc = failed
+    }
+    
+    func timeLapseBuilder(_ timelapseBuilder: TimeLapseBuilder, didMakeProgress progress: Progress) {
+        self.progressFunc?(progress)
+    }
+    
+    func timeLapseBuilder(_ timelapseBuilder: TimeLapseBuilder, didFinishWithURL url: URL) {
+        self.finishedFunc?(url)
+    }
+    
+    func timelapseBuilder(_ timelapseBuilder: TimeLapseBuilder, didFailWithError error: Error) {
+        self.failedFunc?(error)
     }
 }
 
