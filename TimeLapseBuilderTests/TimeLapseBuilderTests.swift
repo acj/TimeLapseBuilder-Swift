@@ -89,6 +89,45 @@ class TimeLapseBuilderTests: XCTestCase {
         waitForExpectations(timeout: 5, handler: nil)
     }
     
+    func testWhenGivenAnInvalidFirstAssetPath_returnsAnError() {
+        let expectation = self.expectation(description: "Build timelapse")
+        let testDelegate = TestDelegate(progress: { progress in
+            // Ignore
+        }, finished: { url in
+            XCTFail("Should have failed, but succeeded instead")
+        }, failed: { error in
+            expectation.fulfill()
+        })
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
+        let outputPath = documentsPath.appendingPathComponent("AssembledVideo.mov")
+        
+        let assets = ["file:///invalid/path"]
+        let timelapseBuilder = TimeLapseBuilder(delegate: testDelegate)
+        timelapseBuilder.build(with: assets, type: .mov, toOutputPath: outputPath)
+        
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+    
+    func testWhenGivenAnInvalidSubsequentAssetPath_returnsAnError() {
+        let expectation = self.expectation(description: "Build timelapse")
+        let testDelegate = TestDelegate(progress: { progress in
+            // Ignore
+        }, finished: { url in
+            XCTFail("Should have failed, but succeeded instead")
+        }, failed: { error in
+            expectation.fulfill()
+        })
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
+        let outputPath = documentsPath.appendingPathComponent("AssembledVideo.mov")
+        
+        var assets = assetList(count: 1)
+        assets.append("file:///invalid/path")
+        let timelapseBuilder = TimeLapseBuilder(delegate: testDelegate)
+        timelapseBuilder.build(with: assets, type: .mov, toOutputPath: outputPath)
+        
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+    
     private func assetList(count: Int) -> [String] {
         let assetType = "jpg"
         let bundle = Bundle(for: type(of: self))
