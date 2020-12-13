@@ -28,9 +28,12 @@ public class TimeLapseBuilder {
     }
     
     func build(with assetPaths: [String], type: AVFileType, toOutputPath: String) {
+        // Output video dimensions are inferred from the first image asset
         guard
             let firstAssetPath = assetPaths.first,
-            let firstAssetURL = URL(string: firstAssetPath)
+            let firstAssetURL = URL(string: firstAssetPath),
+            let canvasSize = dimensionsOfImage(url: firstAssetURL),
+            canvasSize != CGSize.zero
         else {
             let error = NSError(
                 domain: kErrorDomain,
@@ -41,8 +44,7 @@ public class TimeLapseBuilder {
             return
         }
         
-        // Output video dimensions are inferred from the first image asset
-        let canvasSize = dimensionsOfImage(url: firstAssetURL)
+        
         var error: NSError?
         let videoOutputURL = URL(fileURLWithPath: toOutputPath)
         
@@ -155,10 +157,10 @@ public class TimeLapseBuilder {
         }
     }
     
-    func dimensionsOfImage(url: URL) -> CGSize {
+    func dimensionsOfImage(url: URL) -> CGSize? {
         guard let imageData = try? Data(contentsOf: url),
               let image = UIImage(data: imageData) else {
-            return CGSize.zero
+            return nil
         }
         
         return image.size
