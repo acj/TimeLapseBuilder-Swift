@@ -13,7 +13,7 @@ func main() {
     
     let timelapseBuilder = TimeLapseBuilder(delegate: Delegate())
     let tempPath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0] as NSString
-    timelapseBuilder.build(with: assets, type: .mov, toOutputPath: tempPath.appendingPathComponent("AssembledVideo.mov"))
+    timelapseBuilder.build(with: assets, atFrameRate: 30, type: .mov, toOutputPath: tempPath.appendingPathComponent("AssembledVideo.mov"))
 }
 
 private func assetList(count: Int) -> [String] {

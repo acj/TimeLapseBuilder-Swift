@@ -16,7 +16,7 @@ class ViewController: UIViewController {
         
         let timelapseBuilder = TimeLapseBuilder(delegate: self)
         let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
-        timelapseBuilder.build(with: assets, type: .mov, toOutputPath: documentsPath.appendingPathComponent("AssembledVideo.mov"))
+        timelapseBuilder.build(with: assets, atFrameRate: 30, type: .mov, toOutputPath: documentsPath.appendingPathComponent("AssembledVideo.mov"))
     }
     
     private func assetList(count: Int) -> [String] {

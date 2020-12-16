@@ -33,7 +33,7 @@ public class TimeLapseBuilder {
         self.delegate = delegate
     }
     
-    public func build(with assetPaths: [String], type: AVFileType, toOutputPath: String) {
+    public func build(with assetPaths: [String], atFrameRate framesPerSecond: Int32, type: AVFileType, toOutputPath: String) {
         // Output video dimensions are inferred from the first image asset
         guard
             let firstAssetPath = assetPaths.first,
@@ -99,7 +99,6 @@ public class TimeLapseBuilder {
                 let media_queue = DispatchQueue(label: "mediaInputQueue")
                 
                 videoWriterInput.requestMediaDataWhenReady(on: media_queue) {
-                    let fps: Int32 = 30
                     let currentProgress = Progress(totalUnitCount: Int64(assetPaths.count))
                     
                     var frameCount: Int64 = 0
@@ -119,7 +118,7 @@ public class TimeLapseBuilder {
                                 )
                                 break
                             }
-                            let presentationTime = CMTimeMake(value: frameCount, timescale: fps)
+                            let presentationTime = CMTimeMake(value: frameCount, timescale: framesPerSecond)
                             
                             if !self.appendPixelBufferForImageAtURL(nextAssetURL, pixelBufferAdaptor: pixelBufferAdaptor, presentationTime: presentationTime) {
                                 error = NSError(

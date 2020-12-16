@@ -27,7 +27,7 @@ class TimeLapseBuilderTests: XCTestCase {
         let timelapseBuilder = TimeLapseBuilder(delegate: testDelegate)
         let assets = assetList(count: 3)
         
-        timelapseBuilder.build(with: assets, type: .mov, toOutputPath: outputPath)
+        timelapseBuilder.build(with: assets, atFrameRate: 30, type: .mov, toOutputPath: outputPath)
         
         waitForExpectations(timeout: 5, handler: nil)
     }
@@ -52,7 +52,7 @@ class TimeLapseBuilderTests: XCTestCase {
         
         let assets = assetList(count: 3)
         let timelapseBuilder = TimeLapseBuilder(delegate: testDelegate)
-        timelapseBuilder.build(with: assets, type: .mov, toOutputPath: outputPath)
+        timelapseBuilder.build(with: assets, atFrameRate: 30, type: .mov, toOutputPath: outputPath)
         
         waitForExpectations(timeout: 5, handler: nil)
     }
@@ -82,7 +82,7 @@ class TimeLapseBuilderTests: XCTestCase {
         
         let assets = assetList(count: 30)
         let timelapseBuilder = TimeLapseBuilder(delegate: testDelegate)
-        timelapseBuilder.build(with: assets, type: .mov, toOutputPath: outputPath)
+        timelapseBuilder.build(with: assets, atFrameRate: 30, type: .mov, toOutputPath: outputPath)
         
         waitForExpectations(timeout: 5, handler: nil)
     }
@@ -101,7 +101,7 @@ class TimeLapseBuilderTests: XCTestCase {
         
         let assets = ["file:///invalid/path"]
         let timelapseBuilder = TimeLapseBuilder(delegate: testDelegate)
-        timelapseBuilder.build(with: assets, type: .mov, toOutputPath: outputPath)
+        timelapseBuilder.build(with: assets, atFrameRate: 30, type: .mov, toOutputPath: outputPath)
         
         waitForExpectations(timeout: 5, handler: nil)
     }
@@ -121,7 +121,7 @@ class TimeLapseBuilderTests: XCTestCase {
         var assets = assetList(count: 1)
         assets.append("file:///invalid/path")
         let timelapseBuilder = TimeLapseBuilder(delegate: testDelegate)
-        timelapseBuilder.build(with: assets, type: .mov, toOutputPath: outputPath)
+        timelapseBuilder.build(with: assets, atFrameRate: 30, type: .mov, toOutputPath: outputPath)
         
         waitForExpectations(timeout: 5, handler: nil)
     }
