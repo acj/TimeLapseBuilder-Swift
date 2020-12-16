@@ -241,6 +241,16 @@
 			path = "SampleApp-iOS";
 			sourceTree = "<group>";
 		};
+		6486ABFF25898ED700E29190 /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				64C76B662585B3B2007D758A /* blue.jpg */,
+				64C76B642585B3B2007D758A /* red.jpg */,
+				64C76B652585B3B2007D758A /* white.jpg */,
+			);
+			name = Fixtures;
+			sourceTree = "<group>";
+		};
 		64C76C032586B5A8007D758A /* TimeLapseBuilder-iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,12 +304,10 @@
 		64C76C6E2586B8C8007D758A /* TimeLapseBuilder-Common */ = {
 			isa = PBXGroup;
 			children = (
-				64C76B662585B3B2007D758A /* blue.jpg */,
-				64C76B642585B3B2007D758A /* red.jpg */,
-				64C76B652585B3B2007D758A /* white.jpg */,
-				640B4BB91DDF3C4F003F10E4 /* TimeLapseBuilderTests.swift */,
+				6486ABFF25898ED700E29190 /* Fixtures */,
 				64C76B772586855F007D758A /* TestDelegate.swift */,
 				640B4BC41DDF3C69003F10E4 /* TimeLapseBuilder.swift */,
+				640B4BB91DDF3C4F003F10E4 /* TimeLapseBuilderTests.swift */,
 			);
 			path = "TimeLapseBuilder-Common";
 			sourceTree = "<group>";
