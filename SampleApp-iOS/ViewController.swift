@@ -55,7 +55,7 @@ extension ViewController: TimelapseBuilderDelegate {
         }
     }
     
-    public func timelapseBuilder(_ timelapseBuilder: TimeLapseBuilder, didFailWithError error: Error) {
+    public func timeLapseBuilder(_ timelapseBuilder: TimeLapseBuilder, didFailWithError error: Error) {
         let alert = UIAlertController(title: "Couldn't build timelapse", message: "\(error)", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)

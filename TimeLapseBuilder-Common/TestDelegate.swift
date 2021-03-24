@@ -27,7 +27,7 @@ class TestDelegate: TimelapseBuilderDelegate {
         self.didFinish?(url)
     }
     
-    func timelapseBuilder(_ timelapseBuilder: TimeLapseBuilder, didFailWithError error: Error) {
+    func timeLapseBuilder(_ timelapseBuilder: TimeLapseBuilder, didFailWithError error: Error) {
         self.didFailWithError?(error)
     }
 }

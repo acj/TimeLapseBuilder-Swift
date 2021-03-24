@@ -46,7 +46,7 @@ class Delegate: TimelapseBuilderDelegate {
         exit(0)
     }
 
-    public func timelapseBuilder(_ timelapseBuilder: TimeLapseBuilder, didFailWithError error: Error) {
+    public func timeLapseBuilder(_ timelapseBuilder: TimeLapseBuilder, didFailWithError error: Error) {
         print("Failed to produce video: \(error)")
         exit(1)
     }

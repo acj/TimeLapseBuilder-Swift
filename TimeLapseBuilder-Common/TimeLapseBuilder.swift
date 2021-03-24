@@ -21,7 +21,7 @@ let kFailedToProcessAssetPath = 3
 public protocol TimelapseBuilderDelegate: class {
     func timeLapseBuilder(_ timelapseBuilder: TimeLapseBuilder, didMakeProgress progress: Progress)
     func timeLapseBuilder(_ timelapseBuilder: TimeLapseBuilder, didFinishWithURL url: URL)
-    func timelapseBuilder(_ timelapseBuilder: TimeLapseBuilder, didFailWithError error: Error)
+    func timeLapseBuilder(_ timelapseBuilder: TimeLapseBuilder, didFailWithError error: Error)
 }
 
 public class TimeLapseBuilder {
@@ -46,7 +46,7 @@ public class TimeLapseBuilder {
                 code: kFailedToDetermineAssetDimensions,
                 userInfo: ["description": "TimelapseBuilder failed to determine the dimensions of the first asset. Does the URL or file path exist?"]
             )
-            self.delegate.timelapseBuilder(self, didFailWithError: error)
+            self.delegate.timeLapseBuilder(self, didFailWithError: error)
             return
         }
         
@@ -140,7 +140,7 @@ public class TimeLapseBuilder {
                     videoWriterInput.markAsFinished()
                     videoWriter.finishWriting {
                         if let error = error {
-                            self.delegate.timelapseBuilder(self, didFailWithError: error)
+                            self.delegate.timeLapseBuilder(self, didFailWithError: error)
                         } else {
                             self.delegate.timeLapseBuilder(self, didFinishWithURL: videoOutputURL)
                         }
@@ -158,7 +158,7 @@ public class TimeLapseBuilder {
         }
         
         if let error = error {
-            self.delegate.timelapseBuilder(self, didFailWithError: error)
+            self.delegate.timeLapseBuilder(self, didFailWithError: error)
         }
     }
     
