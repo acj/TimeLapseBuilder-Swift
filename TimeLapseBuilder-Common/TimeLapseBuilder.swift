@@ -18,7 +18,7 @@ let kFailedToAppendPixelBufferError = 1
 let kFailedToDetermineAssetDimensions = 2
 let kFailedToProcessAssetPath = 3
 
-public protocol TimelapseBuilderDelegate: class {
+public protocol TimelapseBuilderDelegate: AnyObject {
     func timeLapseBuilder(_ timelapseBuilder: TimeLapseBuilder, didMakeProgress progress: Progress)
     func timeLapseBuilder(_ timelapseBuilder: TimeLapseBuilder, didFinishWithURL url: URL)
     func timeLapseBuilder(_ timelapseBuilder: TimeLapseBuilder, didFailWithError error: Error)

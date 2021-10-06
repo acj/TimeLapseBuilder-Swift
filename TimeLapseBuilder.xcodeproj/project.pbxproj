@@ -201,6 +201,7 @@
 		640B4B981DDF3C4F003F10E4 = {
 			isa = PBXGroup;
 			children = (
+				64869CAC270D2134001D0382 /* Sources */,
 				640B4BA31DDF3C4F003F10E4 /* SampleApp-iOS */,
 				64C76C032586B5A8007D758A /* TimeLapseBuilder-iOS */,
 				64C76C102586B5A8007D758A /* TimeLapseBuilder-iOSTests */,
@@ -239,6 +240,13 @@
 				640B4BB01DDF3C4F003F10E4 /* Info.plist */,
 			);
 			path = "SampleApp-iOS";
+			sourceTree = "<group>";
+		};
+		64869CAC270D2134001D0382 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		6486ABFF25898ED700E29190 /* Fixtures */ = {
@@ -477,7 +485,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1220;
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					640B4BA01DDF3C4F003F10E4 = {
 						CreatedOnToolsVersion = 8.1;
@@ -973,6 +981,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
@@ -991,6 +1000,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
