@@ -220,6 +220,7 @@ public class TimeLapseBuilder {
             bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue
         )
         
+        context?.clear(CGRect(x: 0, y: 0, width: CVPixelBufferGetWidth(pixelBuffer), height: CVPixelBufferGetHeight(pixelBuffer)))
         context?.draw(image.cgImage!, in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
         
         CVPixelBufferUnlockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: 0))
