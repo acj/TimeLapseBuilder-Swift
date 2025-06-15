@@ -15,11 +15,11 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Build and test
-        run: xcodebuild clean test -quiet -project TimeLapseBuilder.xcodeproj -scheme TimeLapseBuilder-iOS -destination "platform=iOS Simulator,name=iPhone 16 Pro"
+        run: xcodebuild clean test -project TimeLapseBuilder.xcodeproj -scheme TimeLapseBuilder-iOS -destination "platform=iOS Simulator,name=iPhone 16 Pro"
 
   macos:
     runs-on: macos-15
     steps:
       - uses: actions/checkout@master
       - name: Build and test
-        run: xcodebuild clean test -quiet -project TimeLapseBuilder.xcodeproj -scheme TimeLapseBuilder-macOS
+        run: xcodebuild clean test -project TimeLapseBuilder.xcodeproj -scheme TimeLapseBuilder-macOS
