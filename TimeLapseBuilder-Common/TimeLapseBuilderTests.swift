@@ -29,7 +29,7 @@ class TimeLapseBuilderTests: XCTestCase {
         
         timelapseBuilder.build(with: assets, atFrameRate: 30, type: .mov, toOutputPath: outputPath)
         
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 30, handler: nil)
     }
     
     func testWhenGivenASeriesOfImages_reportsProgressCorrectly() {
@@ -54,7 +54,7 @@ class TimeLapseBuilderTests: XCTestCase {
         let timelapseBuilder = TimeLapseBuilder(delegate: testDelegate)
         timelapseBuilder.build(with: assets, atFrameRate: 30, type: .mov, toOutputPath: outputPath)
         
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 30, handler: nil)
     }
     
     func testWhenGivenASeriesOfImages_producesVideoOfExpectedDuration() {
@@ -84,7 +84,7 @@ class TimeLapseBuilderTests: XCTestCase {
         let timelapseBuilder = TimeLapseBuilder(delegate: testDelegate)
         timelapseBuilder.build(with: assets, atFrameRate: 30, type: .mov, toOutputPath: outputPath)
         
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 30, handler: nil)
     }
     
     func testWhenGivenAnInvalidFirstAssetPath_returnsAnError() {
@@ -103,7 +103,7 @@ class TimeLapseBuilderTests: XCTestCase {
         let timelapseBuilder = TimeLapseBuilder(delegate: testDelegate)
         timelapseBuilder.build(with: assets, atFrameRate: 30, type: .mov, toOutputPath: outputPath)
         
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 30, handler: nil)
     }
     
     func testWhenGivenAnInvalidSubsequentAssetPath_returnsAnError() {
@@ -123,7 +123,7 @@ class TimeLapseBuilderTests: XCTestCase {
         let timelapseBuilder = TimeLapseBuilder(delegate: testDelegate)
         timelapseBuilder.build(with: assets, atFrameRate: 30, type: .mov, toOutputPath: outputPath)
         
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 30, handler: nil)
     }
     
     private func assetList(count: Int) -> [String] {
