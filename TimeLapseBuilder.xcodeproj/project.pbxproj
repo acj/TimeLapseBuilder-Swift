@@ -11,14 +11,14 @@
 		640B4BAA1DDF3C4F003F10E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 640B4BA81DDF3C4F003F10E4 /* Main.storyboard */; };
 		640B4BAF1DDF3C4F003F10E4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 640B4BAD1DDF3C4F003F10E4 /* LaunchScreen.storyboard */; };
 		640BD6961E75CB310089B27A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640BD6951E75CB310089B27A /* AppDelegate.swift */; };
+		6467E7A12DFE5D7C00515957 /* TimeLapseBuilder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64C76C022586B5A8007D758A /* TimeLapseBuilder.framework */; };
+		6467E7A22DFE5D7C00515957 /* TimeLapseBuilder.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 64C76C022586B5A8007D758A /* TimeLapseBuilder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		64C76B582585AD4C007D758A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 640B4BAB1DDF3C4F003F10E4 /* Assets.xcassets */; };
 		64C76B722586717E007D758A /* blue.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64C76B662585B3B2007D758A /* blue.jpg */; };
 		64C76B732586717E007D758A /* red.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64C76B642585B3B2007D758A /* red.jpg */; };
 		64C76B742586717E007D758A /* white.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64C76B652585B3B2007D758A /* white.jpg */; };
 		64C76C0B2586B5A8007D758A /* TimeLapseBuilder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64C76C022586B5A8007D758A /* TimeLapseBuilder.framework */; };
 		64C76C142586B5A8007D758A /* TimeLapseBuilder_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 64C76C042586B5A8007D758A /* TimeLapseBuilder_iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		64C76C172586B5A8007D758A /* TimeLapseBuilder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64C76C022586B5A8007D758A /* TimeLapseBuilder.framework */; };
-		64C76C192586B5A8007D758A /* TimeLapseBuilder.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 64C76C022586B5A8007D758A /* TimeLapseBuilder.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		64C76C2A2586B5D7007D758A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C76C292586B5D7007D758A /* main.swift */; };
 		64C76C402586B65D007D758A /* TimeLapseBuilder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64C76C372586B65D007D758A /* TimeLapseBuilder.framework */; };
 		64C76C472586B65D007D758A /* TimeLapseBuilder_macOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 64C76C392586B65D007D758A /* TimeLapseBuilder_macOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -42,6 +42,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6467E79F2DFE5CCF00515957 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 640B4B991DDF3C4F003F10E4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 64C76C012586B5A8007D758A;
+			remoteInfo = "TimeLapseBuilder-iOS";
+		};
+		6467E7A32DFE5D7C00515957 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 640B4B991DDF3C4F003F10E4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 64C76C012586B5A8007D758A;
+			remoteInfo = "TimeLapseBuilder-iOS";
+		};
 		64C76C0C2586B5A8007D758A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 640B4B991DDF3C4F003F10E4 /* Project object */;
@@ -55,13 +69,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 640B4BA01DDF3C4F003F10E4;
 			remoteInfo = "SampleApp-iOS";
-		};
-		64C76C152586B5A8007D758A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 640B4B991DDF3C4F003F10E4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 64C76C012586B5A8007D758A;
-			remoteInfo = "TimeLapseBuilder-iOS";
 		};
 		64C76C412586B65D007D758A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -87,13 +94,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		64C76C182586B5A8007D758A /* Embed Frameworks */ = {
+		6467E7A52DFE5D7C00515957 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				64C76C192586B5A8007D758A /* TimeLapseBuilder.framework in Embed Frameworks */,
+				6467E7A22DFE5D7C00515957 /* TimeLapseBuilder.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -146,7 +153,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				64C76C172586B5A8007D758A /* TimeLapseBuilder.framework in Frameworks */,
+				6467E7A12DFE5D7C00515957 /* TimeLapseBuilder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,12 +356,13 @@
 				640B4B9D1DDF3C4F003F10E4 /* Sources */,
 				640B4B9E1DDF3C4F003F10E4 /* Frameworks */,
 				640B4B9F1DDF3C4F003F10E4 /* Resources */,
-				64C76C182586B5A8007D758A /* Embed Frameworks */,
+				6467E7A52DFE5D7C00515957 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				64C76C162586B5A8007D758A /* PBXTargetDependency */,
+				6467E7A02DFE5CCF00515957 /* PBXTargetDependency */,
+				6467E7A42DFE5D7C00515957 /* PBXTargetDependency */,
 			);
 			name = "SampleApp-iOS";
 			productName = TimeLapseBuilder;
@@ -478,7 +486,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1220;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1640;
 				TargetAttributes = {
 					640B4BA01DDF3C4F003F10E4 = {
 						CreatedOnToolsVersion = 8.1;
@@ -658,6 +666,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6467E7A02DFE5CCF00515957 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 64C76C012586B5A8007D758A /* TimeLapseBuilder-iOS */;
+			targetProxy = 6467E79F2DFE5CCF00515957 /* PBXContainerItemProxy */;
+		};
+		6467E7A42DFE5D7C00515957 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 64C76C012586B5A8007D758A /* TimeLapseBuilder-iOS */;
+			targetProxy = 6467E7A32DFE5D7C00515957 /* PBXContainerItemProxy */;
+		};
 		64C76C0D2586B5A8007D758A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 64C76C012586B5A8007D758A /* TimeLapseBuilder-iOS */;
@@ -667,11 +685,6 @@
 			isa = PBXTargetDependency;
 			target = 640B4BA01DDF3C4F003F10E4 /* SampleApp-iOS */;
 			targetProxy = 64C76C0E2586B5A8007D758A /* PBXContainerItemProxy */;
-		};
-		64C76C162586B5A8007D758A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 64C76C012586B5A8007D758A /* TimeLapseBuilder-iOS */;
-			targetProxy = 64C76C152586B5A8007D758A /* PBXContainerItemProxy */;
 		};
 		64C76C422586B65D007D758A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -833,16 +846,16 @@
 		640B4BBF1DDF3C4F003F10E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "SampleApp-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.acj.TimeLapseBuilderSwift;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.github.acj.TimeLapseBuilderSwift-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
@@ -852,16 +865,16 @@
 		640B4BC01DDF3C4F003F10E4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "SampleApp-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.github.acj.TimeLapseBuilderSwift;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.github.acj.TimeLapseBuilderSwift-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
@@ -887,13 +900,14 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "TimeLapseBuilder-iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_dylib;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -927,13 +941,14 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "TimeLapseBuilder-iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_dylib;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				MTL_FAST_MATH = YES;
@@ -950,21 +965,21 @@
 		64C76C1E2586B5A8007D758A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = BFEG4H6KA5;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "TimeLapseBuilder-iOSTests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.linuxguy.TimeLapseBuilder-iOSTests";
@@ -978,21 +993,21 @@
 		64C76C1F2586B5A8007D758A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = BFEG4H6KA5;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "TimeLapseBuilder-iOSTests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.linuxguy.TimeLapseBuilder-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1013,9 +1028,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = io.github.acj.TimeLapseBuilderSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
@@ -1033,8 +1049,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_FAST_MATH = YES;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = io.github.acj.TimeLapseBuilderSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
@@ -1066,7 +1083,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -1106,7 +1123,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				MTL_FAST_MATH = YES;
@@ -1123,7 +1140,6 @@
 		64C76C4C2586B65D007D758A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -1138,7 +1154,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.linuxguy.TimeLapseBuilder-macOSTests";
@@ -1151,7 +1167,6 @@
 		64C76C4D2586B65D007D758A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -1166,7 +1181,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.linuxguy.TimeLapseBuilder-macOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
