@@ -97,55 +97,57 @@ public class TimeLapseBuilder {
                 assert(pixelBufferAdaptor.pixelBufferPool != nil)
                 
                 let media_queue = DispatchQueue(label: "mediaInputQueue")
-                
+
+                let currentProgress = Progress(totalUnitCount: Int64(assetPaths.count))
+                var frameCount: Int64 = 0
+                var remainingAssetPaths = [String](assetPaths)
+
                 videoWriterInput.requestMediaDataWhenReady(on: media_queue) {
-                    let currentProgress = Progress(totalUnitCount: Int64(assetPaths.count))
-                    
-                    var frameCount: Int64 = 0
-                    var remainingAssetPaths = [String](assetPaths)
-                    
-                    while !remainingAssetPaths.isEmpty {
-                        while videoWriterInput.isReadyForMoreMediaData {
-                            if remainingAssetPaths.isEmpty {
-                                break
-                            }
-                            let nextAssetPath = remainingAssetPaths.remove(at: 0)
-                            guard let nextAssetURL = URL(string: nextAssetPath) else {
-                                error = NSError(
-                                    domain: kErrorDomain,
-                                    code: kFailedToProcessAssetPath,
-                                    userInfo: ["description": "TimelapseBuilder failed to process the asset path. Is it a valid URL or file path?"]
-                                )
-                                break
-                            }
-                            let presentationTime = CMTimeMake(value: frameCount, timescale: framesPerSecond)
-                            
-                            if !self.appendPixelBufferForImageAtURL(nextAssetURL, pixelBufferAdaptor: pixelBufferAdaptor, presentationTime: presentationTime) {
-                                error = NSError(
-                                    domain: kErrorDomain,
-                                    code: kFailedToAppendPixelBufferError,
-                                    userInfo: ["description": "AVAssetWriterInputPixelBufferAdapter failed to append pixel buffer"]
-                                )
-                                
-                                break
-                            }
-                            
-                            frameCount += 1
-                            
-                            currentProgress.completedUnitCount = frameCount
-                            self.delegate.timeLapseBuilder(self, didMakeProgress: currentProgress)
+                    while videoWriterInput.isReadyForMoreMediaData {
+                        guard let nextAssetPath = remainingAssetPaths.first else {
+                            break
                         }
+                        remainingAssetPaths.removeFirst()
+
+                        guard let nextAssetURL = URL(string: nextAssetPath) else {
+                            error = NSError(
+                                domain: kErrorDomain,
+                                code: kFailedToProcessAssetPath,
+                                userInfo: ["description": "TimelapseBuilder failed to process the asset path. Is it a valid URL or file path?"]
+                            )
+                            remainingAssetPaths.removeAll()
+                            break
+                        }
+                        let presentationTime = CMTimeMake(value: frameCount, timescale: framesPerSecond)
+
+                        if !self.appendPixelBufferForImageAtURL(nextAssetURL, pixelBufferAdaptor: pixelBufferAdaptor, presentationTime: presentationTime) {
+                            error = NSError(
+                                domain: kErrorDomain,
+                                code: kFailedToAppendPixelBufferError,
+                                userInfo: ["description": "AVAssetWriterInputPixelBufferAdapter failed to append pixel buffer"]
+                            )
+
+                            remainingAssetPaths.removeAll()
+                            break
+                        }
+
+                        frameCount += 1
+
+                        currentProgress.completedUnitCount = frameCount
+                        self.delegate.timeLapseBuilder(self, didMakeProgress: currentProgress)
                     }
-                    
-                    videoWriterInput.markAsFinished()
-                    videoWriter.finishWriting {
-                        if let error = error {
-                            self.delegate.timeLapseBuilder(self, didFailWithError: error)
-                        } else {
-                            self.delegate.timeLapseBuilder(self, didFinishWithURL: videoOutputURL)
+
+                    if remainingAssetPaths.isEmpty {
+                        videoWriterInput.markAsFinished()
+                        videoWriter.finishWriting {
+                            if let error = error {
+                                self.delegate.timeLapseBuilder(self, didFailWithError: error)
+                            } else {
+                                self.delegate.timeLapseBuilder(self, didFinishWithURL: videoOutputURL)
+                            }
+
+                            self.videoWriter = nil
                         }
-                        
-                        self.videoWriter = nil
                     }
                 }
             } else {
