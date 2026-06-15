@@ -11,6 +11,69 @@ import XCTest
 @testable import TimeLapseBuilder
 
 class TimeLapseBuilderTests: XCTestCase {
+    private enum WarmUpError: Error, CustomStringConvertible {
+        case missingAsset
+        case timedOut
+        case buildFailed(Error)
+
+        var description: String {
+            switch self {
+            case .missingAsset:
+                return "encoder warm-up could not find its source image in the test bundle"
+            case .timedOut:
+                return "encoder warm-up did not finish within 120 seconds"
+            case .buildFailed(let error):
+                return "encoder warm-up failed to build: \(error)"
+            }
+        }
+    }
+    
+    private static var warmUpOutcome: Result<Void, Error>?
+
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        try Self.warmUpEncoder()
+    }
+    
+    private static func warmUpEncoder() throws {
+        if let warmUpOutcome = warmUpOutcome {
+            try warmUpOutcome.get()
+            return
+        }
+
+        let outcome = performWarmUp()
+        warmUpOutcome = outcome
+        try outcome.get()
+    }
+    
+    private static func performWarmUp() -> Result<Void, Error> {
+        guard let warmUpAsset = Bundle(for: TimeLapseBuilderTests.self).url(forResource: "red", withExtension: "jpg")?.absoluteString else {
+            return .failure(WarmUpError.missingAsset)
+        }
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        var buildError: Error?
+        let delegate = TestDelegate(progress: { _ in }, finished: { _ in
+            semaphore.signal()
+        }, failed: { error in
+            buildError = error
+            semaphore.signal()
+        })
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
+        let outputPath = documentsPath.appendingPathComponent("WarmUp.mov")
+        
+        let builder = TimeLapseBuilder(delegate: delegate)
+        builder.build(with: [warmUpAsset], atFrameRate: 30, type: .mov, toOutputPath: outputPath)
+        
+        guard semaphore.wait(timeout: .now() + 120) == .success else {
+            return .failure(WarmUpError.timedOut)
+        }
+        if let buildError = buildError {
+            return .failure(WarmUpError.buildFailed(buildError))
+        }
+        return .success(())
+    }
+
     func testWhenGivenASeriesOfImages_producesAnOutputFile() {
         let expectation = self.expectation(description: "Build timelapse")
         let testDelegate = TestDelegate(progress: { (progress: Progress) in
