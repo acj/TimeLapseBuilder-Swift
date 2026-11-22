@@ -14,6 +14,9 @@ jobs:
     runs-on: macos-15
     steps:
       - uses: actions/checkout@master
+      # Workaround for https://github.com/actions/runner-images/issues/12948
+      - name: Prime CoreSimulator
+        run: xcrun simctl list > /dev/null
       - name: Build and test
         run: xcodebuild clean test -project TimeLapseBuilder.xcodeproj -scheme TimeLapseBuilder-iOS -destination "platform=iOS Simulator,name=iPhone 16 Pro"
 
